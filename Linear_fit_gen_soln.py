@@ -4,36 +4,38 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-N_train = 15 # number of training data
-sigma_X = np.random.uniform(0.05, 0.15, N_train) # sample x coordinate errors from uniform distribution
-sigma_Y = np.random.uniform(0.05, 0.15, N_train) # sample y coordinate errors from uniform distribution
-noise_X = np.multiply(sigma_X, np.random.randn(N_train)) 
-noise_Y = np.multiply(sigma_Y, np.random.randn(N_train))
+N_train = 40 # number of training data
+sigma_X = np.random.uniform(0.05, 0.1, N_train) # sample x coordinate sigmas from uniform distribution
+sigma_Y = np.random.uniform(0.05, 0.1, N_train) # sample y coordinate sigmas from uniform distribution
+noise_X = np.multiply(sigma_X, np.random.randn(N_train)) # error on x data (normally distributed)
+noise_Y = np.multiply(sigma_Y, np.random.randn(N_train)) # error on y data (normally distributed)
+ 
+# True parameters of the model which will be used to generate data
+a_true = 1.2 
+b_true = 2.5
 
-a_true = -2.7
-b_true = 3.4
+X = np.linspace(0.1, 0.9, N_train) + noise_X # observed X points
+Y = b_true*(X-noise_X) + a_true + noise_Y # observed Y points (I think noise on X values must not effect Y, so
+# I decided to create Y points without considering errors on X values (Gull-1989 pg. 1))
 
-X = np.linspace(0.1, 0.99, N_train) + noise_X # observed X points
-Y = b_true*X + a_true + noise_Y # observed Y points
-
+# Create a figure
 fig = plt.figure(figsize=(7, 6))
 plt.style.use('seaborn-paper')
 plt.rc('font', family='sans-serif')
-# colors: 'darkmagenta','indigo','mediumslateblue','steelblue','teal','turquoise','orchid'
 
-# Plotting data
-plt.errorbar(X, Y, xerr=sigma_X, yerr=sigma_Y, fmt='o', label='data', ms=8.5, alpha=0.8) # error bars show SD
+# Plotting data (Choose either one of below)
+plt.plot(X, Y, 'o', label='data', ms=8.5, alpha=0.8)
+#plt.errorbar(X, Y, xerr=sigma_X, yerr=sigma_Y, fmt='o', label='data', ms=8.5, alpha=0.8) # error bars show SD
 
 # Plotting the line with true parameters
-x_plot = np.linspace(0.01, 1.1, 100)
+x_plot = np.linspace(0.01, 1.1, 150)
 y_true_plot = b_true*x_plot + a_true
 plt.plot(x_plot, y_true_plot, '--', linewidth = 2.0, label=('line with true parameters (a=' + str(a_true) +
                                                             ', b=' + str(b_true) + ')'))
 
-iter = 4 # number of iterations
 
 # Function that calculates the parameters (using same notation with York)
-def linear_fit(b_pred): # start with a prediction of b (b_pred)
+def linear_fit(b_pred, iter): # start with a prediction of b and number of iterations
     for k in range(iter):  
         W = np.multiply(sigma_X, sigma_Y)/(b_pred**2*sigma_Y + sigma_X)
         X_bar = np.sum(np.multiply(W, X))/np.sum(W)
@@ -61,13 +63,13 @@ def linear_fit(b_pred): # start with a prediction of b (b_pred)
             b.append(alpha + 2*np.sqrt(alpha**2 - beta) * 
                      np.cos(1/3*(np.arccos((alpha**3 - 3*alpha*beta/2 + gamma/2)/
                                            (alpha**2 - beta)**(3/2)) + 2*np.pi*j)))
-        b_pred = b[2] # root we are looking for is generally the third one
+        b_pred = b[2] # root we are looking for is generally the third one (if solution is unusual check that)
         
     a_pred = Y_bar - b_pred*X_bar # calculate the intercept
     return a_pred, b_pred
 
 # Defining predicted parameters
-a_fit, b_fit = linear_fit(5) # with and initial value of b_pred
+a_fit, b_fit = linear_fit(5, 4) # input a reasonable b prediction (small values can cause error)
 
 # Plotting linear fit
 y_plot = a_fit + b_fit*x_plot

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Date: 2 April 2021
 # Author: Çağatay Eskin
 

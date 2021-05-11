@@ -1,6 +1,13 @@
 some sample code to experiment with.
 
 -- A file for routines to generate fake data
-... Different kinds of data, differing from each other in their errors.
+... Different routintes for different kinds of data, the "kind" of data
+refers to the types of errors (gaussian symmetric in y, gaussian
+symmetric in y and x, non gaussian symmetric in y, etc. etc.).
 -- Another one to call these routines and plot them
 -- Eventually another one to work on these fake data
+-- Some utility routines
+
+Use:
+python linear_fitting.py
+to run

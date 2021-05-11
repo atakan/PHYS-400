@@ -10,3 +10,8 @@ using "statistics"
 
 side 1: generating and fitting into data w/ asymmetric error bars (first
 	in y, then in both directions)
+
+
+More: There are a lot of methods mentioned in Macdonald and Thompson
+(1992, Am. J. Phys. 60, p66). Implementing them all and generalizing to
+non-linear functions would easily become a master's project.

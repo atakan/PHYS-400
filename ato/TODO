@@ -1,0 +1,12 @@
+-- fitting routines for data w/ y-errors.
+... this will use "statistics", created by other routines
+-- side 1*
+-- generating data w/ x- & y-errors.
+-- making fit to this data w/ AmJP method
+-- making fit to this data w/ Numerical Recipes method
+-- making fit to this data w/ Bayesian method.
+-- making fit to this data w/ neural nets (1) recurrent (2) feed forward
+using "statistics"
+
+side 1: generating and fitting into data w/ asymmetric error bars (first
+	in y, then in both directions)

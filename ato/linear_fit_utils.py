@@ -34,12 +34,12 @@ def get_stats1(x, y, sigmay):
             s2 = np.mean(sigmay, axis=1)**2
         else :
             raise NotImplementedError('Only sigma of certain shapes are OK')
+        one_s2 = np.sum(1.0/s2)
     else:
         raise TypeError('Only sigma of certain types are OK')
 
     x2 = x*x
     xy = x*y
-    one_s2 = np.sum(1.0/s2)
     x_s2 = np.sum(x/s2)
     y_s2 = np.sum(y/s2)
     x2_s2 = np.sum(x2/s2)

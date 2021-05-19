@@ -11,3 +11,8 @@ symmetric in y and x, non gaussian symmetric in y, etc. etc.).
 Use:
 python linear_fitting.py
 to run
+
+*** Estimating uncertainities in parameters ***
+Bunun için verileri hata payları içinde oynatıp, yeni fitler yapıp,
+değişimlere bakabiliriz. Bu yolla çok boyutlu bir dağılım elde
+edebiliriz.

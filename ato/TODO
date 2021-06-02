@@ -15,3 +15,9 @@ side 1: generating and fitting into data w/ asymmetric error bars (first
 More: There are a lot of methods mentioned in Macdonald and Thompson
 (1992, Am. J. Phys. 60, p66). Implementing them all and generalizing to
 non-linear functions would easily become a master's project.
+
+===
+TODO for ato:
+-- implementing bootstrap for uncertainties
+-- implementing adoptation of NR fitting routines for Python
+... both linear with two errors and general linear least squares
